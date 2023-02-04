@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table</title>
+	{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'table.css' %}">
+</head>
+<body>
+
+
+	<nav class="navbar navbar-inverse">
+		<ul class="nav navbar-nav">
+			 <li class="active"><a href="{% url 'index' %}#">Home</a>
+			<li><a href="#">About us</a></li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
+		</ul>
+		
+		</div>	
+	</nav>
+
+	<h1> Solar Prediction</h1>
+
+		<div class="box">
+			<h2>Hourly Analysis</h2>
+			<h3 style="color:white; float:right"><b>Date:</b>{{date}} </h3>
+			<div class="text">
+					<table class=" table table-bordered  table-responsive">
+						<thead>
+							<th> Time</th>
+							<th> GHI</th>
+						</thead>
+						{% for i,j in ans %}
+						<tr>
+							<td>{{i}}</td>
+							<td>{{j}}</td>
+						</tr>
+						{% endfor %}
+						
+				</table>
+
+			</div>
+		</div>
+
+</body>
+</html>

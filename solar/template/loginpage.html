@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'signup.css' %}">
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		
+		<ul class="nav navbar-nav">
+			 <li><a href="{% url 'index' %}">Home</a>
+			<li><a href="#">About us</a></li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			
+			<li><a href="{% url 'register'%}"><span class="glyphicon glyphicon-user"></span>  Sign up</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+		</ul>
+		
+		</div>	
+	</nav>
+
+	<h1> Solar Prediction</h1>
+
+
+	<div class="box">
+		<div class = "sgbox" style="margin-left: 4.5vh;">
+		<form method="post">
+				{% csrf_token%}
+ 				<div class="form-group">
+  					<label for="username" class="text" style="">Username:</label>
+  					<input type="text" class="form-control" name="username" id="username" style="width:40vh; height: 40px;">
+				</div>
+				<div class="form-group">
+  					<label for="password" class="text">Password:</label>
+  					<input type="password" class="form-control"  name="password" id="password" style="width:40vh;height: 40px;">
+				</div> 
+				<input type="submit" name="submit" value="submit">
+		</form>
+	</div>
+	</div>
+</body>
+</html>

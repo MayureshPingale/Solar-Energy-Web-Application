@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>datepicker</title>
+	{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'datepicker.css' %}">
+</head>
+<body>
+
+
+	<nav class="navbar navbar-inverse">
+		<ul class="nav navbar-nav">
+			 <li class="active"><a href="{% url 'index' %}#">Home</a>
+			<li><a href="#">About us</a></li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
+		</ul>
+		
+		</div>	
+	</nav>
+
+	<h1> Solar Prediction</h1>
+
+	<div class="box">
+		<form method="POST">
+			{%csrf_token%}
+			<div class="date-input">
+				<label class="text">Select a date</label>
+ 					<div class="form-group">
+                		<div class='input-group date' id='datetimepicker1'>
+                    		<input type='date' id="date_for_ghi" name="date_for_ghi" class="form-control" />
+                    		<span class="input-group-addon">
+                        	<span class="glyphicon glyphicon-calendar"></span>
+                    		</span>
+                		</div>
+                	</div>
+               	<input type="submit" name="submit" value="submit">
+            </div>
+				<script type="text/javascript">
+            		$(function () {
+                	$('#datetimepicker1').datetimepicker();
+            		});
+        		</script>      
+		</form>
+	</div>
+
+</body>
+</html>

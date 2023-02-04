@@ -1,0 +1,25 @@
+body{
+	background-image: url("images/solar3.jpg");
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	
+}
+
+nav{
+  height: 60px;
+  max-height: 100px;
+}
+
+a{
+ 	font-size: 20px;
+}
+
+h1{
+	float: left ;
+	font-family: sans-serif;
+	font-style: italic;
+	margin-top:20px;
+	margin-left: 20px;
+	font-size: 45px;
+}

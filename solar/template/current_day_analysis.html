@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Current day analysis</title>
+	{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'current_day_analysis.css' %}">
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		
+		<ul class="nav navbar-nav">
+			 <li><a href="{% url 'index' %}">Home</a>
+			<li><a href="#">About us</a></li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			
+			<li><a href="{% url 'register'%}"><span class="glyphicon glyphicon-user"></span>  Sign up</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+		</ul>
+		
+		</div>	
+	</nav>
+
+	<h1> Solar Prediction</h1>
+
+
+	<div class="box">
+
+		<h1>Current Day analysis </h1>
+		<br><br>
+		<h2><b> Date: </b> {{date}}</h2>
+
+
+		<div id="piechart"></div>
+		 	<script type="text/javascript">
+
+				google.charts.load('current', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+  					var data = google.visualization.arrayToDataTable([
+  					['Solar Energy', 'Used per Hour'],
+  					['Energy used', {{ current_usage}}],
+  					['Energy Left',{{curr}}]
+				]);
+
+  				// Optional; add a title and set the width and height of the chart
+  				var options = {'title':'My Average Day',
+  								'width':600,
+  								'height':600,
+  								'backgroundColor':'none',
+  								 'textStyle' :{color:'black'},
+  								chartArea:{left:150,top:-1000,width:'100%',height:'100%'},
+  								'fontSize': 20,
+  								'colors':['red','yellow'],
+  								'is3D' : true,
+  								'legend':{'alignment': 'center', textStyle: {color: 'white', fontSize: 16}}
+  								};
+
+  				// Display the chart inside the <div> element with id="piechart"
+  				var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  				chart.draw(data, options);
+				}
+			</script>
+
+			<div class="text">
+				<h3><b>Energy Generated (till now): </b> {{curr}} watts </h3>
+				<h3><b>Energy used (till now):      </b> {{current_usage}} watts </h3>
+				<h3><b>Total energy estimated:      </b> {{total}} watts</h3>
+
+				<h3><a href= "{% url 'current_hourly' %}" style="font-size: 25px; color: orange"><u> Click here for hourly analysis</u></a></h3>
+
+			</div>		
+
+		</div>
+	
+</body>
+</html>

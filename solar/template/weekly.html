@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weekly analysis</title>
+	{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'weekly.css' %}">
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		
+		<ul class="nav navbar-nav">
+			 <li><a href="{% url 'index' %}">Home</a>
+			<li><a href="#">About us</a></li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			
+			<li><a href="{% url 'register'%}"><span class="glyphicon glyphicon-user"></span>  Sign up</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+		</ul>
+		
+		</div>	
+	</nav>
+
+	<h1> Solar Prediction</h1>
+
+
+	<div class="box">
+
+		<h1>Weekly analysis </h1>
+		<br><br>
+		<h2><b> Start Date: </b> {{date}}</h2>
+
+
+		<div id="chartdiv" style="width: 100%; height: 400px; background-color: 'none';margin-top: 130px" ></div>
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"angle": 30,
+					"depth3D": 30,
+					"startDuration": 1,
+					"color": "#FFFFFF",
+					"fontSize": 18,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] on [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "Energy used",
+							"type": "column",
+							"valueField": "column-1"
+						},
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "Remaining Energy",
+							"type": "column",
+							"valueField": "column-2"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"stackType": "regular",
+							"title": "Energy units"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true,
+						"color":"#FFFFFF"
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": ""
+						}
+					],
+					"dataProvider": [
+					{% for i,j,z in ans %}
+						{
+							"category": "{{i}}",
+							"column-1": {{j}},
+							"column-2": {{z}}
+						},
+					{% endfor %}
+					]
+				}
+			);
+		</script>
+
+		<div class="text">
+		<h3><b>Total Energy Generated: </b> {{total}} watts </h3>
+		<h3><b>Total Remaining Generated: </b> {{energy_left}} watts </h3>
+		</div>
+	</div>
+
+</body>
+</html>

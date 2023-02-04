@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Future analysis</title>
+	{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'future_analysis.css' %}">
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		
+		<ul class="nav navbar-nav">
+			 <li><a href="{% url 'index' %}">Home</a>
+			<li><a href="#">About us</a></li>
+
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			
+			<li><a href="{% url 'register'%}"><span class="glyphicon glyphicon-user"></span>  Sign up</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+		</ul>
+		
+		</div>	
+	</nav>
+
+	<h1> Solar Prediction</h1>
+
+
+	<div class="box">
+
+		<h1>Future Day analysis </h1>
+		<br><br>
+		<h2><b> Date: </b> {{date}}</h2>
+
+
+		<div id="chartdiv" style="width: 100%; height: 400px; background-color: 'none';margin-top: 130px" ></div>
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"angle": 30,
+					"depth3D": 30,
+					"startDuration": 1,
+					"color": "#FFFFFF",
+					"fontSize": 20,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "graph 1",
+							"type": "column",
+							"valueField": "column-1"
+						},
+						{
+							"balloonText": "[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "graph 2",
+							"type": "column",
+							"valueField": "column-2"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"stackType": "3d",
+							"title": "Energy units"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": false,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 20,
+							"text": "Peak hour of Solar energy"
+						}
+					],
+					"dataProvider": [
+						{% for i,j in peak_hours %}
+						{
+							"category": {{i}},
+							"column-2": {{j}}
+						},
+						{% endfor %}
+					]
+				}
+			);
+		</script>
+
+		<div class="text">
+		<h3><b>Energy Generated (Estimated): </b> {{total}} watts </h3>
+		<h3><a href="{% url 'future_hourly' date  %}" style="font-size: 25px; color: orange"><u> Click here for hourly analysis</u></a></h3>
+		</div>
+	</div>
+
+</body>
+</html>
